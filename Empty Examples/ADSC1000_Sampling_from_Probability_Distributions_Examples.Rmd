@@ -1,0 +1,118 @@
+---
+title: "ADSC1000_Sampling_from_Probability_Distributions_Examples"
+author: "Sean Hellingman"
+date: "2023-09-01"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Example 1 from slides
+
+```{r discrete-random-variable}
+rm(list = ls()) #Remove all objects from the workspace
+
+# Set the seed!!
+set.seed(14)
+
+# Number of simulations
+n <- 100
+
+# Generate random numbers from a uniform(0, 1) distribution
+random_numbers <- runif(n, min = 0, max = 1)
+
+# Define the cumulative probabilities
+PMF <- c(0.2,0.3,0.1,0.4)
+CDF <- cumsum(PMF)
+
+# Initialize a vector to store the simulated outcomes
+simulated_outcomes <- numeric(length = n)
+
+# Simulate the outcomes
+for (i in 1:n) {
+  if (random_numbers[i] <= CDF[1]) {
+    simulated_outcomes[i] <- 1
+  } else if (random_numbers[i] <= CDF[2]) {
+    simulated_outcomes[i] <- 2
+  } else if (random_numbers[i] <= CDF[3]) {
+    simulated_outcomes[i] <- 3
+  } else {
+    simulated_outcomes[i] <- 4
+  }
+}
+
+# Count the frequency of each outcome
+table(simulated_outcomes)
+
+
+
+```
+
+
+
+
+
+
+
+## Example 2 from slides
+
+
+
+```{r continous-random-variable}
+
+set.seed(1000)
+
+# Number of random observations
+n <- 10
+# Generate random observations from a uniform(0,1) distribution
+uniform_samples <- runif(n)
+# Define the rate parameter for the exponential distribution
+lambda <- 4
+# Simulate from the exponential distribution using inverse transform
+exponential_samples_1 <- -log(1 - uniform_samples) / lambda
+
+#OR Unising the built in Quantile function in R#
+exponential_samples_2 <- qexp(uniform_samples, rate = lambda)
+
+
+
+
+```
+
+
+
+
+```{r uniform-simulations}
+
+set.seed(123)
+
+mean(runif(2))
+mean(runif(10))
+mean(runif(100))
+mean(runif(1000))
+
+
+```
+
+
+
+
+
+## Example 3 from slides
+
+
+```{r normal-simulations}
+set.seed(14)
+
+
+```
+
+
+
+
+
+
+

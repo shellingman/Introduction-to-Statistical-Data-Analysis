@@ -1,0 +1,175 @@
+---
+title: "ADSC1000_Continuous_Probability_Distributions_Examples"
+author: "Sean Hellingman"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Example 1 from slides
+#### Single Integration 
+
+```{r}
+
+
+my_distribution <- function(x){
+  
+  out <- 2 - 2*x
+  
+  }
+
+integrate(my_distribution,
+          lower = 0,
+          upper = 1)
+
+```
+
+
+
+
+```{r definition}
+
+curve(expr = my_distribution, from = -0.2, to = 1.2 )
+abline(v = 0)
+abline(h = 0)
+```
+
+
+
+## Example 2 from slides
+
+
+```{r Graphics}
+
+par(mfrow = c(1, 2))
+
+curve(expr = my_distribution, from = -0.2, to = 1.2 )
+abline(v = c(0,0.2),col=c("black","red"))
+abline(h = 0)
+
+
+
+curve(expr = my_distribution, from = -0.2, to = 1.2 )
+abline(v = c(0,0.1,0.3),col=c("black","red","red"))
+abline(h = 0)
+
+```
+
+
+We could use the areas of triangles to arrive at the solutions: Area = (axb)/2
+
+
+1. 
+
+2.
+
+```{r Triangles}
+
+
+
+
+
+```
+
+
+
+
+
+Or, we could use calculus (works in general)
+
+
+
+```{r Calculus}
+
+
+#integrate(my_distribution,
+#          lower = 0,
+#          upper = 1)
+
+
+
+
+
+```
+
+
+
+
+Plot standard normal distribution:
+
+```{r Normal plot}
+
+
+# Create a sequence of numbers between -10 and 10 incrementing by 0.01.
+x <- seq(-10, 10, by = .01)
+
+# Standard normal
+y <- dnorm(x, mean = 0, sd = 1)
+
+
+plot(x,y,main = "Standard Normal Distribution",xlim = c(-4,4))
+
+
+
+```
+
+
+## Example 3 from slides
+
+```{r 4-plots}
+
+#par(mfrow = c(1, 2))
+
+
+
+
+```
+
+
+
+
+### Example 4 from slides
+
+```{r}
+
+#pnorm(0.5)
+
+
+```
+
+
+
+
+
+Plot exponential distribution:
+
+```{r exp plot}
+
+
+# Create a sequence of numbers between -10 and 10 incrementing by 0.01.
+x <- seq(0, 10, by = .01)
+
+# Standard normal
+y <- dexp(x, rate = 1)
+
+
+plot(x,y,main = "Exponential Distribution",xlim = c(-0.05,4))
+
+
+
+```
+
+
+
+## Example 5 from slides
+
+
+
+
+
+
+## Exercise 3 from slides

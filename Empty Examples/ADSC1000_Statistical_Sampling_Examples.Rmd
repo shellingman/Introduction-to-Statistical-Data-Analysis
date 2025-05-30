@@ -1,0 +1,141 @@
+---
+title: "ADSC1000_Sampling_Examples"
+author: "Sean Hellingman"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r data}
+
+set.seed(14)
+
+data("mtcars")
+mtcars$Car <- row.names(mtcars) #add row names as a vector
+
+```
+
+
+
+
+Two ways to generate a *random* sample in R:
+
+```{r sample-examples}
+
+#Base R:
+?sample() #help
+
+random_order <- sample(nrow(mtcars)) #essentially shuffles the incidences
+random_cars <- mtcars[random_order[1:5],] #Random sample of 5 cars
+random_cars
+
+#Using dplyr:
+library(dplyr)
+?sample_n() #help
+
+random_cars.2 <- mtcars %>%
+  sample_n(5, replace = FALSE)
+random_cars.2
+
+```
+
+
+
+
+
+
+## Example 1 from slides
+
+
+```{r random-sample}
+
+#library(dplyr)
+data("starwars")
+
+
+
+
+
+
+```
+
+
+
+
+Stratified sample example:
+
+```{r iris}
+
+set.seed(123)
+
+data("iris")
+
+#need the dplyr package
+#obtain stratified sample
+strat_sample <- iris %>%
+                  group_by(Species) %>% #The stratum
+                  sample_frac(size=.15) # 15% of each group
+
+strat_sample
+
+```
+
+
+
+
+
+## Example 2 from slides
+
+
+```{r stratified}
+
+library(MASS)
+data("Aids2") 
+
+
+
+
+```
+
+
+
+
+Cluster sampling example:
+
+```{r cluster-example}
+
+set.seed(14)
+unique(iris$Species) #Three species
+
+clusters <- sample(unique(iris$Species), size = 2, replace = FALSE) #select 2 out of the three species
+clusters #which clusters are chosen
+
+clusterd_sample <- iris[iris$Species %in% clusters, ] #subset df in list of Species
+
+clusterd_sample # results
+
+```
+
+
+
+## Example 3 from slides
+
+
+```{r cluster-sampling}
+ 
+library(MASS)
+data("Aids2") 
+unique(Aids2$state)
+
+
+
+
+
+
+```
+
+

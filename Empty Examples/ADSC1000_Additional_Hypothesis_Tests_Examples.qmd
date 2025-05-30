@@ -1,0 +1,69 @@
+---
+title: "ADSC1000 Additional Hypothesis Tests Examples"
+author: "Sean Hellingman"
+format: pdf
+editor: visual
+---
+
+## Example 1 from slides
+
+```{r}
+
+library(ggplot2)
+
+set.seed(1234)
+
+Sample1 <- rnorm(133)
+Sample2 <- rchisq(145,7)
+Sample3 <- rnorm(120,0,1)
+
+ggplot() + 
+  stat_ecdf(aes(Sample1), geom = "step", color ="red")+
+  stat_ecdf(aes(Sample2), geom = "step", color ="blue")+
+  stat_ecdf(aes(Sample3), geom = "step", color ="green")+
+  labs(title="Empirical Cumulative \n Density Functions",
+     y = "F(x)", x="Value (x)")+
+theme_classic()
+
+
+```
+
+## Example 2 from slides
+
+```{r}
+
+# ks.test()
+
+## 1 ##
+
+
+## 2 ##
+
+Wages <- read.csv("Wages.csv")
+
+
+```
+
+## Example 3 from slides
+
+```{r}
+
+# wilcox.test()
+
+
+
+
+```
+
+#### Exercises
+
+```{r}
+
+library(dplyr)
+library(MASS)
+data(Cars93)
+
+
+
+
+```

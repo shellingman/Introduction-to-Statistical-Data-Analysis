@@ -1,0 +1,117 @@
+---
+title: "Sampling_Distributions_and_Sampling_Error_Examples"
+author: "Sean Hellingman"
+date: "2023-09-07"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+Expected value: 5
+Variance: 8.33
+
+```{r uniform}
+set.seed(14)
+
+Unif1 <- runif(5, min=0, max = 10)
+mean(Unif1)
+sd(Unif1)
+
+
+Unif2 <- runif(50, min=0, max = 10)
+mean(Unif2)
+var(Unif2)
+
+```
+
+
+
+## Example 1 from slides
+
+```{r }
+
+
+
+
+```
+
+
+
+## Example 2 from slides
+
+
+```{r histogram-function}
+
+
+# Set the seed for reproducibility
+set.seed(123)
+
+
+
+Mean_Uniform_Histogram <- function(num_samples,sample_size,min,max){
+# Simulate data
+simulated_data <- runif(num_samples * sample_size, min = min, max = max)
+
+# Reshape the data into a matrix with num_samples rows
+simulated_data_matrix <- matrix(simulated_data, nrow = num_samples, byrow = TRUE)
+
+# Calculate sample means for each sample
+sample_means <- rowMeans(simulated_data_matrix)
+
+# Create a histogram of sample means
+hist(sample_means, 
+     main = "Histogram of Sample Means",
+     xlab = "Sample Means",
+     col = "lightblue",
+     border = "black",
+     breaks = 20)  # You can adjust the number of bins as needed
+
+}
+
+
+
+# Number of samples and sample size
+num_samples <- 100  # Number of samples
+sample_size <- 10    # Size of each sample
+
+Mean_Uniform_Histogram(100,10,0,10)
+
+
+```
+
+
+
+```{r}
+
+
+
+
+```
+
+
+
+
+## Example 3 from slides
+
+
+```{r standard-errors}
+
+sqrt(33.33)
+
+```
+
+
+
+
+## Example 4 from slides
+
+```{r}
+
+pnorm(0.5,mean = 1,sd = sqrt(2))
+
+
+```
+

@@ -1,0 +1,218 @@
+---
+title: "ADSC1000 Solutions to Assumption Violations"
+format: pdf
+editor: visual
+---
+
+### Data Description:
+
+A data.frame with 935 observations on 17 variables:
+
+-   wage: monthly earnings
+-   hours: average weekly hours
+-   IQ: IQ score
+-   KWW: knowledge of world work score
+-   educ: years of education
+-   exper: years of work experience
+-   tenure: years with current employer
+-   age: age in years
+-   married: =1 if married
+-   black: =1 if black
+-   south: =1 if live in south
+-   urban: =1 if live in SMSA (standard metropolitan statistical area)
+-   sibs: number of siblings
+-   brthord: birth order
+-   meduc: mother's education (years)
+-   feduc: father's education (years)
+-   lwage: natural log of wage
+
+## Example 1 from slides
+
+```{r}
+
+wage2 <- read.csv("wage2.csv")
+library(car)
+
+# lm1 <- lm(wage~age+iq+educ+meduc+hours+tenure+
+#               kww+feduc+exper, data = wage2)
+
+
+## Diagnostics ##
+
+# # linearity #
+# 
+# plot(lm1,1) 
+# 
+# # Normality #
+# plot(lm1,2)
+# shapiro.test(rstandard(lm1))
+# 
+# 
+# # Constant Variance #
+# plot(lm1,3)
+# ncvTest(lm1)
+# 
+# 
+# # Independence #
+# 
+# vif(lm1)
+# durbinWatsonTest(lm1)
+
+```
+
+### Required function
+
+```{r}
+
+panel.hist <- function(x, ...)
+{
+    usr <- par("usr")
+    par(usr = c(usr[1:2], 0, 1.5) )
+    h <- hist(x, plot = FALSE)
+    breaks <- h$breaks; nB <- length(breaks)
+    y <- h$counts; y <- y/max(y)
+    rect(breaks[-nB], 0, breaks[-1], y, col = "cyan", ...)
+}
+
+panel.cor <- function(x, y, digits = 2, prefix = "", cex.cor, ...)
+{
+    usr <- par("usr")
+    par(usr = c(0, 1, 0, 1))
+    r <- abs(cor(x, y))
+    txt <- format(c(r, 0.123456789), digits = digits)[1]
+    txt <- paste0(prefix, txt)
+    if(missing(cex.cor)) cex.cor <- 0.8/strwidth(txt)
+    text(0.5, 0.5, txt, cex = cex.cor * r)
+}
+
+
+
+```
+
+## Example 2 from slides
+
+```{r}
+
+library(dplyr)
+
+# na.omit(wage2) %>% 
+#   select(wage,age,iq,educ,meduc) %>% 
+#   pairs(
+#       lower.panel = panel.cor,
+#                  diag.panel = panel.hist,
+#                  upper.panel = panel.smooth)
+# 
+# 
+# 
+# na.omit(wage2) %>% 
+#   select(wage,hours,tenure,kww,feduc,exper) %>% 
+#   pairs(
+#       lower.panel = panel.cor,
+#                  diag.panel = panel.hist,
+#                  upper.panel = panel.smooth)
+
+```
+
+## Example 3 from slides
+
+```{r}
+
+vif(lm1)
+
+
+```
+
+## Example 4 from slides
+
+```{r}
+library(MASS)
+
+# bc <- boxcox(lm1)
+# lambda <- bc$x[which.max(bc$y)]
+# # To transform your data:
+# transform.df <- transform(wage2, BoxWages =
+# wage∧(lambda))
+# 
+# lmBox <- lm()
+
+## 2 ##
+
+# wt <- 1/lm(abs(lm1$residuals)~lm1$fitted.values)$fitted.values^2
+# 
+# wls.model <- lm(,
+#                 weights = wt)
+# 
+# summary(wls.model)
+
+
+```
+
+### Outliers Example
+
+```{r}
+
+ Outliers <- read.csv("Outliers.csv")
+
+
+ boxplot(Outliers)
+ plot(Outliers)
+
+
+ggplot(data=Outliers,mapping = aes(x = X1, y = Y1)) +
+  geom_point()+
+  labs(title = "#5: Scatterplot of Y1 by X1",
+       x = "X1",
+       y = "Y1")+
+ geom_text(x=3, y=20, label=paste("Correlation: ",round(cor(Outliers$X1,Outliers$Y1),digits=3))) + geom_smooth(method='lm') #Add regression line to plot
+
+
+
+ggplot(data=Outliers,mapping = aes(x = X2, y = Y2)) +
+  geom_point()+
+  labs(title = "#5: Scatterplot of Y2 by X2",
+       x = "X1",
+       y = "Y1")+
+ geom_text(x=3, y=20, label=paste("Correlation: ",round(cor(Outliers$X2,Outliers$Y2),digits=3))) + geom_smooth(method='lm') #Add regression line to plot
+
+
+
+## Regression Outliers ##
+
+lm5.1 <- lm(Y1 ~ X1 + X2, data = Outliers)
+summary(lm5.1)
+
+plot(lm5.1,5)
+
+# Remove Outlier #
+lm5.2 <- lm(Y1 ~ X1 + X2, data = Outliers[1:39,])
+summary(lm5.2)
+
+plot(lm5.2,5)
+
+```
+
+## Example 5 from slides
+
+```{r}
+
+
+# # Normality #
+# plot(lm1,2)
+# shapiro.test(rstandard(lm1))
+
+## Outliers ##
+
+# plot(lm1,3)
+# plot(lm1,4)
+
+# data[-c(1,4,6),]
+
+```
+
+## Example 6 from slides
+
+```{r}
+
+
+
+```

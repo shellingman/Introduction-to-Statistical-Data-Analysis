@@ -1,0 +1,83 @@
+---
+title: "ADSC1000 Random Variables & Probability Distributions Examples"
+author: "Sean Hellingman"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Example 1 from slides
+
+
+
+
+## Example 2 from slides
+Solution is given in the slides
+
+
+## Example 3 from slides
+
+
+## Example 4 from slides
+*Careful, 5 is included in the interval!*
+
+
+
+## Example 5 from slides
+
+
+
+## Example 6 from slides
+
+
+
+
+## Example 7 from slides
+
+
+
+
+
+Binomial distribution examples:
+
+```{r Binomial}
+
+?dbinom()
+?pbinom()
+
+dbinom(x, n, p) #calculates P(X = x )
+pbinom(x, n, p) #calculates P(X ≤ x )
+
+
+
+```
+
+
+
+## Example 8 from slides
+
+
+
+Poisson distribution examples:
+
+
+```{r Poisson}
+
+?dpois()
+?ppois()  
+
+dpois(x, lambda) #calculates P(X = x )
+ppois(x, lambda, lower.tail = TRUE) #calculates P(X ≤ x ) & P(X > x ) if lower.tail = FALSE.
+
+```
+
+
+
+
+## Example 9 from slides
+
+

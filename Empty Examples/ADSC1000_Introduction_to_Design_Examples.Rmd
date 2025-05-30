@@ -1,0 +1,45 @@
+---
+title: "ADSC1000 Introduction to Experimental Design"
+author: "Sean Hellingman"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Example 1 from slides
+
+Experimental units (subjects):
+
+
+Factors (treatments):
+
+
+Levels:
+
+
+Response variable:
+
+
+Design:
+
+
+
+## Exaple 2 from slides
+
+Experimental units (subjects):
+
+
+Factors (treatments):
+
+
+Levels:
+
+
+Response variable:
+
+
+Design:
+
